@@ -34,7 +34,8 @@ the line that was just created with `write-mode-left-margin' spaces"
     ;; If there are already characters typed, we assume we are loading
     ;; from a saved file, and simply go to the end of the buffer and
     ;; recenter it.
-    (if (string= (buffer-substring-no-properties (point-min) (point-max)) "")
+    (if (not (string=
+               (buffer-substring-no-properties (point-min) (point-max)) ""))
       (progn
         (goto-char (point-max))
         (recenter))
