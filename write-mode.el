@@ -27,5 +27,17 @@ the line that was just created with `write-mode-left-margin' spaces"
   (setq mode-line-format nil) ; Remove the mode-line (only for this buffer)
   (auto-fill-mode 1)
 
-  (define-key write-mode-map (kbd "RET") 'write-mode-newline-recenter-indent))
-  
+  (define-key write-mode-map (kbd "RET") 'write-mode-newline-recenter-indent)
+
+  ;; Place cursor at the line in the middle of the screen
+  (let ((middle-line (/ (window-height (get-buffer-window)) 2)))
+    ;; If there are already characters typed, we assume we are loading
+    ;; from a saved file, and simply go to the end of the buffer and
+    ;; recenter it.
+    (if (string= (buffer-substring-no-properties (point-min) (point-max)) "")
+      (progn
+        (goto-char (point-max))
+        (recenter))
+      (goto-char (point-min)) ; Although we should be there already
+      (newline middle-line)
+      (indent-line-to write-mode-left-margin))))
