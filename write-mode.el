@@ -37,7 +37,7 @@ the line that was just created with `write-mode-left-margin' spaces"
     (if (not (string=
                (buffer-substring-no-properties (point-min) (point-max)) ""))
       (progn
-        (goto-char (point-max))
+        (goto-char (- (point-max) 1))
         (recenter))
       (goto-char (point-min)) ; Although we should be there already
       (newline middle-line)
