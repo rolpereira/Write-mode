@@ -27,9 +27,5 @@ the line that was just created with `write-mode-left-margin' spaces"
   (setq mode-line-format nil) ; Remove the mode-line (only for this buffer)
   (auto-fill-mode 1)
 
-  (define-key write-mode-map (kbd "RET") (lambda ()
-                                           (interactive)
-                                           (newline)
-                                           (recenter)
-                                           (indent-line-to 5))))
+  (define-key write-mode-map (kbd "RET") 'write-mode-newline-recenter-indent))
   
